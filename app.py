@@ -82,6 +82,10 @@ def upload_receipt_page(db, ocr, categorizer, nutrition):
                             st.error("No text could be extracted from the image. Please try a clearer image.")
                             return
                         
+                        # Show extracted text for debugging
+                        with st.expander("🔍 View Extracted Text (Debug)"):
+                            st.text_area("Raw OCR Output:", extracted_text, height=150)
+                        
                         st.success("Text extracted successfully!")
                         
                         # Parse items and prices
@@ -89,7 +93,15 @@ def upload_receipt_page(db, ocr, categorizer, nutrition):
                         
                         if not items_data:
                             st.warning("No grocery items could be identified in the receipt.")
-                            st.text_area("Extracted Text:", extracted_text, height=200)
+                            st.markdown("**Troubleshooting tips:**")
+                            st.markdown("• Make sure the receipt image is clear and well-lit")
+                            st.markdown("• Ensure item names and prices are clearly visible")
+                            st.markdown("• Try taking the photo from directly above the receipt")
+                            st.markdown("• Check that the receipt contains individual grocery items with prices")
+                            
+                            with st.expander("📝 Show Extracted Text for Manual Review"):
+                                st.text_area("Extracted Text:", extracted_text, height=200)
+                                st.markdown("*Look for item names followed by prices in the text above.*")
                             return
                         
                         # Create DataFrame for display
