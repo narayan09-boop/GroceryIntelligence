@@ -144,4 +144,4 @@ This project is open source and available under the MIT License.
 
 ---
 
-**Built with ❤️ using Streamlit, Python, and OCR technology**
+**Built by Narayan using Streamlit, Python, and OCR technology**
